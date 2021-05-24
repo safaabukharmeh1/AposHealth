@@ -16,7 +16,7 @@ print(sys.path)
 from Sites.Studio.Pages.loginPage import LoginPage
 from Sites.Studio.Pages.homePage import HomePage
 from Sites.Studio.Pages.selecSite import SelectSite
-from Sites.Studio.Pages.CMS_page import CMSPage
+from Sites.Studio.Pages.cmspage import CMSPage
 from Sites.Studio.Pages.PlanTemplatePage import PlanTemplate
 
 import unittest

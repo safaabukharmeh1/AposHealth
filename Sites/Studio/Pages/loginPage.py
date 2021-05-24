@@ -1,5 +1,6 @@
 from Sites.Studio.Locators.locators import Locators
 
+
 class LoginPage:
 
     def __init__(self, driver):
