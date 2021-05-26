@@ -5,18 +5,19 @@ class Locators:
     # Login page objects
     username_textbox_name = "UserName"
     password_textbox_name = "Password"
-    login_button_xpath = "/html/body/div/section/div[1]/div/div[2]/form/div[4]/button"
+    login_button_xpath = "//*[@type='submit']" # xpath updated
 
     # SelectSite page objects
     site1_xpath = "/html/body/div/section/div/div/div/div[2]/ul/li[1]/a/div/h2"
     site2_xpath = "/html/body/div/section/div/div/div/div[2]/ul/li[2]/a/div/h2"
 
     # home page objects
-    logout_arrow_xpath = "// *[ @ id = 'shrinkNav'] / div[1] / div[2] / div[3] / a / b"
+    logout_arrow_xpath = "/*[@id='shrinkNav']/div[1]/div[2]/div[3]/a/b"
     logoutlink_text = "Log Out"
 
-    rmdy_studio_logo_xpath = "//*[@id='shrinkNav']/div[1]/div[1]/h1"
-    cms_button_xpath = "/html/body/div[1]/div[3]/section/div[2]/div[2]/div[1]/div/div[3]/div/a"
+    # Xpath updated
+    rmdy_studio_logo_xpath = "//div[@class ='navbar-header pointer']"
+    cms_button_xpath = "//*[contains( @ href,'CMS')][contains(text(), 'Content Manager')]"
     add_folder_button_id = "AddFolderBtn"
 
     add_folder_button_xpath = "// *[ @ id = 'form0'] / div[2] / div[2] / input"

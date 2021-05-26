@@ -2,8 +2,7 @@ import sys
 from selenium import webdriver
 sys.path.append('/')
 print(sys.path)
-from Sites.Studio.Pages.loginPage import LoginPage
-from Sites.Studio.Pages.selecSite import SelectSite
+
 
 import HTMLTestRunner
 import pytest
