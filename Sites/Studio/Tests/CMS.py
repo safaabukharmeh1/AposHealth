@@ -3,7 +3,6 @@ sys.path.append('C:/Users/skhalili/PycharmProjects/FirstSeleniumTest')
 import time
 import random
 from Sites.Studio.Core import MainFunctions, StudioBaseClass
-
 sys.path.append('C:/Users/skhalili/PycharmProjects/FirstSeleniumTest')
 print(sys.path)
 from Sites.Studio.Pages.cmspage import CMSPage
@@ -14,15 +13,10 @@ class TestCMS(StudioBaseClass.StudioBaseClass):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # cls.driver = webdriver.Chrome("../../../Library/chromedriver.exe")
-        # cls.driver.set_page_load_timeout(20)
-        # cls.driver.maximize_window()
         cls.folder_name = "auto_" + str(random.random())
-        # cls.folder_name = "auto_0.7799667430933489"
 
     @pytest.mark.set1
     def test_1_create_cms_folder(self):
-
         self.login_site2()
         time.sleep(3)
         # driver = MainFunctions.MainFunction.login_site2(self)
@@ -82,8 +76,8 @@ class TestCMS(StudioBaseClass.StudioBaseClass):
 
     @classmethod
     def tearDownClass(cls):
-        # cls.driver.close()
-        # cls.driver.quit()
+        cls.driver.close()
+        cls.driver.quit()
         print("Test Completed")
 
 

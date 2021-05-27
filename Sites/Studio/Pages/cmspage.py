@@ -118,7 +118,7 @@ class CMSPage:
         # self.driver.find_element_by_id(Locators.add_video_file_save_button_id).click()
         element = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.ID, Locators.add_video_file_save_button_id)))
         element.click()
-        time.sleep(15)
+        time.sleep(10)
         self.driver.find_element_by_xpath(Locators.Go_back_to_CMS_xpath).click()
 
     def add_pdf(self, folder_name, pdf_url):
