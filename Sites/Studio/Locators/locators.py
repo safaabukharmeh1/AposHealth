@@ -15,24 +15,26 @@ class Locators:
     logout_arrow_xpath = "/*[@id='shrinkNav']/div[1]/div[2]/div[3]/a/b"
     logoutlink_text = "Log Out"
 
-    # Xpath updated
+    # CMS
     rmdy_studio_logo_xpath = "//div[@class ='navbar-header pointer']"
     cms_button_xpath = "//*[contains( @ href,'CMS')][contains(text(), 'Content Manager')]"
     add_folder_button_id = "AddFolderBtn"
 
-    add_folder_button_xpath = "// *[ @ id = 'form0'] / div[2] / div[2] / input"
+    add_folder_button_xpath = "//*[@id='form0']/div[2]/div[2]/input"
     folder_name_text_field_id = "FolderName"
 
     add_button_xpath = "//*[@id='form0']/div[2]/div[2]/input"
 
     add_document_button_xpath = "//*[@id='JSAddDocumentBtn']"
-    add_article_xpath = "// *[ @ id = 'JSMenuAddDocumentBTN'] / li[1]"
+    add_article_xpath = "// *[@id='JSMenuAddDocumentBTN']/li[1]"
     article_title_xpath = "//*[@id='Name']"
     article_author_id = "Author"
     article_body_xpath = "/html/body"
     article_save_button = "submitBtn"
 
     Go_back_to_CMS_xpath = "/html/body/div[1]/div[3]/section/div/div[1]/h1/span"
+
+    go_back_to_folders = "//span[contains(text(),'<')]"
 
     add_video_xpath = "//*[@id='JSMenuAddDocumentBTN']/li[2]"
     add_video_title_id = "Name"
@@ -65,7 +67,8 @@ class Locators:
     add_a_question_answer2 = "//*[@id='AnswerOptions_1__OptionText']"
     add_a_question_answer3 = "//*[@id='AnswerOptions_2__OptionText']"
     add_a_question_save_button_xpath = "//*[@id='SendBtn']"
-
+    yes_button_xpath = "//input[@value='Yes']"
+    delete_article_xpath = "//tbody/tr[1]/td[5]/span[4]/i[1]" # delete first row
     # Site management Locator
     new_patient_select_test_site_id = "siteSelectionForm"
     new_patient_button_id = "newGroupBtn"
@@ -142,6 +145,8 @@ class Locators:
     plan_template_required_task_xpath = "//*[@id='ListTasksPhase']/li/span/input"
     plan_template_publish_to_site_button_xpath = "/html/body/div[1]/div[3]/section/div[1]/div/a[4]"
     plan_template_commit_publish_to_site_xpath = "//*[@id='WLpopupdialog']/div/div[2]/div/div/input[1]"
+
+
 
 
 

@@ -11,7 +11,7 @@ class StudioBaseClass(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.driver = webdriver.Chrome("../../../Library/chromedriver.exe")
-        cls.driver.set_page_load_timeout(20)
+        cls.driver.set_page_load_timeout(30)
         cls.driver.maximize_window()
         # set implicit wait time
         cls.driver.implicitly_wait(20)  # second

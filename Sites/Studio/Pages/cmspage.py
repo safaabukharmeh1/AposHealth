@@ -1,21 +1,15 @@
 import time
-import sys
-sys.path.append('C:/Users/skhalili/PycharmProjects/FirstSeleniumTest')
 from Sites.Studio.Locators.locators import Locators
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 import pyautogui
 
-
-
 class CMSPage:
     def __init__(self, driver):
         self.driver = driver
         self.rowNumber = 1
-
 
     def show_dashboard(self):
         dashboard = self.driver.find_element_by_xpath(Locators.rmdy_studio_logo_xpath)
@@ -30,17 +24,21 @@ class CMSPage:
         add_folder_button.click()
 
     def enter_folder_name(self, folder_name):
-
-        self.driver.find_element_by_id(Locators.folder_name_text_field_id).clear()
-        self.driver.find_element_by_id(Locators.folder_name_text_field_id).send_keys(folder_name)
+        folder_name_text_field = self.driver.find_element_by_id(Locators.folder_name_text_field_id)
+        folder_name_text_field.clear()
+        folder_name_text_field.send_keys(folder_name)
 
     def click_add_button(self):
-        self.driver.find_element_by_xpath(Locators.add_button_xpath).click()
+        add_button = self.driver.find_element_by_xpath(Locators.add_button_xpath)
+        add_button.click()
+
+    def click_go_back_to_folders(self):
+        back_button = self.driver.find_element_by_xpath(Locators.go_back_to_folders)
+        back_button.click()
 
     def verify_added_folder(self, folder_name):
-        # element = self.driver.find_element_by_xpath("//div[contains(., folder_name)")
         try:
-            element = self.driver.find_element_by_link_text(folder_name)
+            self.driver.find_element_by_link_text(folder_name)
         except NoSuchElementException:
             print("No files found ..........................")
             return False
@@ -50,25 +48,40 @@ class CMSPage:
         time.sleep(5)
         created_folder = self.driver.find_element_by_link_text(folder_name)
         created_folder.click()
-        self.driver.find_element_by_xpath(Locators.add_document_button_xpath).click()
-        self.driver.find_element_by_xpath(Locators.add_article_xpath).click()
+        add_document_button = self.driver.find_element_by_xpath(Locators.add_document_button_xpath)
+        add_document_button.click()
+        add_article = self.driver.find_element_by_xpath(Locators.add_article_xpath)
+        add_article.click()
         time.sleep(2)
-        self.driver.find_element_by_xpath(Locators.article_title_xpath).send_keys("Auto article")
-        self.driver.find_element_by_id(Locators.article_author_id).send_keys("safa")
+        article_title = self.driver.find_element_by_xpath(Locators.article_title_xpath)
+        article_title.send_keys("Auto article")
+        article_author = self.driver.find_element_by_id(Locators.article_author_id)
+        article_author.send_keys("Safa")
+        # switch to new frame
         self.driver.switch_to.frame(self.driver.find_element_by_id("ifrmaejHtmlArea"))
-        self.driver.find_element_by_xpath(Locators.article_body_xpath).send_keys("My Article...")
+        article_body = self.driver.find_element_by_xpath(Locators.article_body_xpath)
+        article_body.send_keys("My Article...")
+        # Switch back from frame
         self.driver.switch_to.default_content()
-        self.driver.find_element_by_id(Locators.article_save_button).click()
+        article_save_button = self.driver.find_element_by_id(Locators.article_save_button)
+        article_save_button.click()
         time.sleep(2)
-        self.driver.find_element_by_xpath(Locators.Go_back_to_CMS_xpath).click()
+        go_back_to_cms = self.driver.find_element_by_xpath(Locators.Go_back_to_CMS_xpath)
+        go_back_to_cms.click()
 
     def verify_ready_to_go_content(self):
-        self.driver.find_element_by_link_text('Ready-to-go Content').click()
+        ready_to_go = self.driver.find_element_by_link_text('Ready-to-go Content')
+        ready_to_go.click()
         time.sleep(5)
-        self.driver.find_element_by_xpath(Locators.Go_back_to_CMS_xpath).click()
+        go_back_to_cms = self.driver.find_element_by_xpath(Locators.Go_back_to_CMS_xpath)
+        go_back_to_cms.click()
 
-    def find_element_row(self, folder_name):
+    # find_element_row, used in finding folder row to delete that folder (cms.delete_folder)
+    def find_element_row(self):
         try:
+            f = open("cms_folder.txt", "r")
+            folder_name = f.read()
+            f.close()
             WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located((By.TAG_NAME, 'td')))
             table = self.driver.find_element_by_xpath('//*[@id="JSAjaxListFolders"]/div[3]/table')
             trs = table.find_elements_by_tag_name('tr')
@@ -88,38 +101,33 @@ class CMSPage:
                 row_count = row_count + 1
             # will print all the column name  #//*[@id="TableGrid"]/div[1]/table/tbody/tr[4]/td[1]/a[3]
             # tr[4] -row [td1]-column a[3]-button
-
-
-
-        except:
-            print("could not find the column details")
-        # element = self.driver.find_element(By.CSS_SELECTOR, "tr:nth-child(" + str(matched_row_count) + ")" + " " + ".Delete")
-        # actions = ActionChains(self.driver)
-        # actions.move_to_element(element).perform()
-        # element = self.driver.find_element(By.CSS_SELECTOR, "body")
-        # actions = ActionChains(self.driver)
-        # actions.move_to_element(element).perform()
-        # self.driver.find_element(By.CSS_SELECTOR, "tr:nth-child(" + matched_row_count + ")" + " " + ".btn-info").click()
+            return row_count
+        except NoSuchElementException:
+            print("Could not find the column details")
 
     def add_video(self, folder_name, url):
-
         created_folder = self.driver.find_element_by_link_text(folder_name)
         created_folder.click()
-        self.driver.find_element_by_xpath(Locators.add_document_button_xpath).click()
+        add_document = self.driver.find_element_by_xpath(Locators.add_document_button_xpath)
+        add_document.click()
         time.sleep(2)
-        self.driver.find_element_by_xpath(Locators.add_video_xpath).click()
+        add_video = self.driver.find_element_by_xpath(Locators.add_video_xpath)
+        add_video.click()
         time.sleep(2)
-        self.driver.find_element_by_id(Locators.add_video_title_id).send_keys("Auto Video")
-        self.driver.find_element_by_id(Locators.add_video_file_name_id).click()
+        video_title = self.driver.find_element_by_id(Locators.add_video_title_id)
+        video_title.send_keys("Auto Video")
+        add_video_file_name = self.driver.find_element_by_id(Locators.add_video_file_name_id)
+        add_video_file_name.click()
         time.sleep(2)
-
         pyautogui.write(url)
         pyautogui.press('enter')
         # self.driver.find_element_by_id(Locators.add_video_file_save_button_id).click()
-        element = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.ID, Locators.add_video_file_save_button_id)))
+        save_button = Locators.add_video_file_save_button_id
+        element = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.ID, save_button)))
         element.click()
-        time.sleep(10)
-        self.driver.find_element_by_xpath(Locators.Go_back_to_CMS_xpath).click()
+        time.sleep(20)
+        go_back_to_cms = self.driver.find_element_by_xpath(Locators.Go_back_to_CMS_xpath)
+        go_back_to_cms.click()
 
     def add_pdf(self, folder_name, pdf_url):
         created_folder = self.driver.find_element_by_link_text(folder_name)
@@ -156,7 +164,6 @@ class CMSPage:
         self.driver.find_element_by_xpath(Locators.Go_back_to_CMS_xpath).click()
 
     def add_survey(self, folder_name):
-
         created_folder = self.driver.find_element_by_link_text(folder_name)
         created_folder.click()
         self.driver.find_element_by_xpath(Locators.add_document_button_xpath).click()
@@ -188,4 +195,22 @@ class CMSPage:
         self.driver.find_element_by_xpath(Locators.add_a_question_save_button_xpath).click()
         time.sleep(3)
         self.driver.find_element_by_xpath(Locators.Go_back_to_CMS_xpath).click()
+
+    def delete_folder_content(self):
+        i = 1
+        f = open("cms_folder.txt", "r")
+        folder_name = f.read()
+        f.close()
+        folder = self.driver.find_element_by_link_text(folder_name)
+        folder.click()
+        while i < 7:
+            delete_xpath = Locators.delete_article_xpath
+            self.driver.find_element_by_xpath(delete_xpath).click()
+            time.sleep(2)
+            self.driver.find_element_by_xpath(Locators.yes_button_xpath).click()
+            time.sleep(5)
+            i += 1
+        self.driver.find_element_by_xpath(Locators.Go_back_to_CMS_xpath).click()
+
+
 
