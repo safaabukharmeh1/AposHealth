@@ -89,15 +89,13 @@ class CMSPage:
             matched_row_count = 0
             for tr in trs:
                 tds = tr.find_elements_by_tag_name('td')
-                print(tr.text)
+                # print(tr.text)
                 for i, td in enumerate(tds):
                     # This for loop will iterate single row value. Here i is index value
-                    # print(i)
-                    print(td.text)
-                    if i == 0 and  td.text == folder_name:
-                        print("Matched {}: {}".format(i, td.text))
+                    if i == 0 and td.text == folder_name:
+                        # print("Matched {}: {}".format(i, td.text))
                         matched_row_count = row_count
-                        print("matched_row_count :", matched_row_count)
+                        # print("matched_row_count :", matched_row_count)
                 row_count = row_count + 1
             # will print all the column name  #//*[@id="TableGrid"]/div[1]/table/tbody/tr[4]/td[1]/a[3]
             # tr[4] -row [td1]-column a[3]-button

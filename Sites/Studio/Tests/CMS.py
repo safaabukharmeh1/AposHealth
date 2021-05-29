@@ -26,7 +26,7 @@ class TestCMS(StudioBaseClass.StudioBaseClass):
         time.sleep(2)
         cms.show_dashboard()
         cms.click_cms_button()
-        print(cms.verify_added_folder(self.folder_name))
+        # print(cms.verify_added_folder(self.folder_name))
         # if folder doesn't exist create it
         if not cms.verify_added_folder(self.folder_name):
             cms.click_add_folder_button()
@@ -45,7 +45,7 @@ class TestCMS(StudioBaseClass.StudioBaseClass):
     @pytest.mark.set1
     def test2_add_article(self):
         cms = CMSPage(self.driver)
-        print(self.folder_name)
+        # print(self.folder_name)
         if cms.verify_added_folder(self.folder_name):
             cms.add_document(self.folder_name)
             cms.add_pdf(self.folder_name, self.pdf_url)
@@ -67,7 +67,6 @@ class TestCMS(StudioBaseClass.StudioBaseClass):
         time.sleep(2)
         cms.show_dashboard()
         cms.click_cms_button()
-
         row = cms.find_element_row() - 1
         delete_folder_xpath = "//tbody/tr[" + str(row) + "]/td[3]/span[3]"
         delete_folder = self.driver.find_element_by_xpath(delete_folder_xpath)
@@ -75,7 +74,6 @@ class TestCMS(StudioBaseClass.StudioBaseClass):
         time.sleep(2)
         yes_button = self.driver.find_element_by_xpath(Locators.yes_button_xpath)
         yes_button.click()
-
         # assert delete
         time.sleep(5)
         self.driver.refresh()
@@ -87,7 +85,7 @@ class TestCMS(StudioBaseClass.StudioBaseClass):
             self.driver.find_element_by_link_text(folder_name)
             raise ValueError("folder: " + folder_name + " Still exist!")
         except NoSuchElementException:
-            print ("Folder: " + folder_name + " was deleted successfully!")
+            print("Folder: " + folder_name + " was deleted successfully!")
 
     def test3_delete_folder_content(self):
         self.login_site2()

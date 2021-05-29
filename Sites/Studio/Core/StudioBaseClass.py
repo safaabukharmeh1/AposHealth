@@ -19,7 +19,7 @@ class StudioBaseClass(unittest.TestCase):
     def login_site2(self):
         config = configparser.ConfigParser()
         config.read('../config.ini')
-        print(config.sections())
+        # print(config.sections())
         username = config.get('credentials', 'username')
         password = config.get('credentials', 'password')
         url = config.get('url', 'studio_stg_url')
@@ -31,4 +31,3 @@ class StudioBaseClass(unittest.TestCase):
         login.enter_password(password)
         login.click_login()
         select_site.click_site2(self.driver)
-        print("Done Login")
