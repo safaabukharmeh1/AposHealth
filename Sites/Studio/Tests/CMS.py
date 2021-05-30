@@ -60,6 +60,7 @@ class TestCMS(StudioBaseClass.StudioBaseClass):
         else:
             raise Exception("Sorry folder is not available !")
 
+    @pytest.mark.set1
     def test4_delete_folder(self):
         self.login_site2()
         time.sleep(3)
@@ -87,6 +88,7 @@ class TestCMS(StudioBaseClass.StudioBaseClass):
         except NoSuchElementException:
             print("Folder: " + folder_name + " was deleted successfully!")
 
+    @pytest.mark.set1
     def test3_delete_folder_content(self):
         self.login_site2()
         time.sleep(20)

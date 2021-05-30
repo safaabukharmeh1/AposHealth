@@ -22,7 +22,7 @@ class LoginTest(unittest.TestCase):
         cls.driver.set_page_load_timeout(15)
         cls.driver.maximize_window()
 
-    @pytest.mark.set1
+    @pytest.mark.set3
     def test_login_valid(self, username="skhalili_Admin", password="86HbDEy2"):
         driver = self.driver
         select_site = SelectSite(driver)
